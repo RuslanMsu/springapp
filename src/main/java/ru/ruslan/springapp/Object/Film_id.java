@@ -3,11 +3,11 @@ package ru.ruslan.springapp.Object;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Film {
+public class Film_id {
     private Data data;
     private ExternalId externalId;
 
-    public  Film(){}
+    public  Film_id(){}
 
     public void setData(Data data){
         System.out.println(data.getNameEn());

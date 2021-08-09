@@ -10,7 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import ru.ruslan.springapp.Object.Film;
+import ru.ruslan.springapp.Object.Film_id;
+import ru.ruslan.springapp.Object.Search_Films;
 import ru.ruslan.springapp.SpringappApplication;
 
 import java.io.File;
@@ -24,18 +25,21 @@ public class FilmController {
 
     @GetMapping("/search-by-keyword")
     @ResponseBody
-    public ResponseEntity getFilms(@RequestParam Optional<String> keyword){
+    public ResponseEntity getFilms(String keyword){
         String fooResourceUrl
-                = "https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=белый клык";
+                = "https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword={keyword}";
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-API-KEY", "9edb045d-6a23-4ab7-8f9b-6321f366ea31");
         headers.set("accept", "application/json");
 
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("keyword", keyword);
+
         HttpEntity entity = new HttpEntity(headers);
 
-        ResponseEntity<Film> response = restTemplate.exchange(
-                fooResourceUrl, HttpMethod.GET, entity, Film.class);
+        ResponseEntity<Search_Films> response = restTemplate.exchange(
+                fooResourceUrl, HttpMethod.GET, entity, Search_Films.class,params);
 
         return response;
     }
@@ -50,7 +54,7 @@ public class FilmController {
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-API-KEY", "9edb045d-6a23-4ab7-8f9b-6321f366ea31");
         headers.set("accept", "application/json");
-        headers.set("id", id);
+        //headers.set("id", id);
         log.info(id);
 
         Map<String, String> params = new HashMap<String, String>();
@@ -59,14 +63,14 @@ public class FilmController {
 
         HttpEntity entity = new HttpEntity(headers);
 
-        ResponseEntity<Film> response = restTemplate.exchange(
-                fooResourceUrl, HttpMethod.GET, entity, Film.class, params);
+        ResponseEntity<Film_id> response = restTemplate.exchange(
+                fooResourceUrl, HttpMethod.GET, entity, Film_id.class, params);
 
         return response;
     }
 
     @GetMapping("/hello")
-    ResponseEntity<Film> hello() {
+    ResponseEntity<Film_id> hello() {
 
         String fooResourceUrl
                 = "https://kinopoiskapiunofficial.tech/api/v2.1/films/600";
@@ -77,8 +81,8 @@ public class FilmController {
 
         HttpEntity entity = new HttpEntity(headers);
 
-        ResponseEntity<Film> response = restTemplate.exchange(
-                fooResourceUrl, HttpMethod.GET, entity, Film.class);
+        ResponseEntity<Film_id> response = restTemplate.exchange(
+                fooResourceUrl, HttpMethod.GET, entity, Film_id.class);
 
         return response;
     }
@@ -111,8 +115,8 @@ public class FilmController {
 
         HttpEntity entity = new HttpEntity(headers);
 
-        ResponseEntity<Film> response = restTemplate.exchange(
-                fooResourceUrl, HttpMethod.GET, entity, Film.class);
+        ResponseEntity<Film_id> response = restTemplate.exchange(
+                fooResourceUrl, HttpMethod.GET, entity, Film_id.class);
 
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.writeValue(new File("film.json"), response.getBody());
