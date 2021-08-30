@@ -1,4 +1,4 @@
-package ru.ruslan.springapp.Object;
+package ru.ruslan.springapp.dto;
 
 import java.util.List;
 
