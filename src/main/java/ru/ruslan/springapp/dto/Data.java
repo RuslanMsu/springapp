@@ -5,9 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @Setter
+
 public class Data {
     private Integer filmId;
     private String nameRu;
@@ -34,5 +36,4 @@ public class Data {
     private List<Genre> genres;
     private List<String> facts;
     //private List<Object> seasons;
-
 }

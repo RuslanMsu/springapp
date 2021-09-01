@@ -7,8 +7,7 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @Setter
+
 public class Country {
-
     private String country;
-
 }
