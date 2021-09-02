@@ -11,8 +11,9 @@ import java.util.List;
 @Setter
 
 public class Search_Films {
-    public String keyword;
-    public Integer pagesCount;
-    public Integer searchFilmsCountResult;
-    public List<Film> films;
+    private String keyword;
+    private Integer searchFilmsCountResult; //Число фильмов на всех страницах
+    private List<Film> films;               //В списке только число пильмов с первой страницы
+
+    //public Integer pagesCount;
 }

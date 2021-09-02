@@ -5,22 +5,34 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @Setter
 
+@Entity
 public class Film {
-    public Integer filmId;
-    public String nameRu;
-    public String nameEn;
-    public String type;
-    public String year;
-    public String description;
-    public String filmLength;
-    public List<Country> countries;
-    public List<Genre> genres;
-    public String rating;
-    public Integer ratingVoteCount;
-    public String posterUrl;
-    public String posterUrlPreview;
+    @Id
+    @Column(name="Film_Id")
+    private Integer filmId;
+    private String nameEn;
+    private String year;
+    @ElementCollection
+    private List<Genre> genres;
+    private String rating;
+
+
+
+    //public String type;
+    //public String description;
+    //public String filmLength;
+    //private List<Country> countries;
+    //public String nameRu;
+    //public Integer ratingVoteCount;
+    //public String posterUrl;
+    //public String posterUrlPreview;
 }

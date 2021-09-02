@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import ru.ruslan.springapp.UserRepository.FilmsRepository;
+import ru.ruslan.springapp.dto.Film;
 import ru.ruslan.springapp.dto.Film_id;
 import ru.ruslan.springapp.dto.Search_Films;
 
@@ -21,6 +23,7 @@ public class FilmController {
 
     private RestTemplate restTemplate;
     private HttpEntity<String> entity;
+    private FilmsRepository filmsRepository;
 
     @GetMapping("/search-by-keyword")
     public ResponseEntity<Search_Films> getFilms(String keyword){
@@ -30,8 +33,13 @@ public class FilmController {
         Map<String, String> params = new HashMap<>();
         params.put("keyword", keyword);
 
-        return restTemplate.exchange(
+        ResponseEntity<Search_Films> responce = restTemplate.exchange(
                 fooResourceUrl, HttpMethod.GET, entity, Search_Films.class, params);
+        for(Film i : responce.getBody().getFilms()){
+            filmsRepository.save(i);
+        }
+
+        return responce;
     }
 
     @GetMapping("/search-by-id")
