@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import ru.ruslan.springapp.UserRepository.FilmsRepository;
+import ru.ruslan.springapp.FilmRepository.FilmsRepository;
 import ru.ruslan.springapp.dto.Film;
 import ru.ruslan.springapp.dto.Film_id;
 import ru.ruslan.springapp.dto.Search_Films;
