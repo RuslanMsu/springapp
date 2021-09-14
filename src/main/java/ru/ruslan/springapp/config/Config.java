@@ -14,11 +14,10 @@ class Config {
     }
 
     @Bean
-    public HttpEntity entity() {
+    public HttpEntity<String> entity() {
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-API-KEY", "9edb045d-6a23-4ab7-8f9b-6321f366ea31");
         headers.set("accept", "application/json");
-        HttpEntity entity = new HttpEntity(headers);
-        return entity;
+        return new HttpEntity<>(headers);
     }
 }
